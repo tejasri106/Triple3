@@ -1,66 +1,27 @@
-import { SlashCommandBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder, EmbedBuilder } from "discord.js";
-import { getRandomTrivia } from "../helpers/trivia.js";
+import { SlashCommandBuilder } from "discord.js";
+
+const triviaQuestions = [
+  { question: "What is the capital of France?", answer: "Paris" },
+  { question: "What planet is known as the Red Planet?", answer: "Mars" },
+  { question: "Who painted the Mona Lisa?", answer: "Leonardo da Vinci" },
+];
 
 export default {
   data: new SlashCommandBuilder()
     .setName("trivia")
-    .setDescription("Get a random trivia question"),
+    .setDescription("Answer a trivia question"),
 
   async execute(interaction) {
-    const trivia = getRandomTrivia();
+    await interaction.deferReply();
 
-    // Create buttons for each answer option
-    const buttons = trivia.options.map((option, index) =>
-      new ButtonBuilder()
-        .setCustomId(`trivia_${index}`)
-        .setLabel(option)
-        .setStyle(ButtonStyle.Primary)
+    const trivia =
+      triviaQuestions[Math.floor(Math.random() * triviaQuestions.length)];
+
+    // 🔑 store answer on the client, not the module
+    interaction.client.currentTriviaAnswer = trivia.answer;
+
+    await interaction.editReply(
+      `Trivia Question:\n${trivia.question}\n\nType your answer in chat.`
     );
-
-    const row = new ActionRowBuilder().addComponents(buttons);
-
-    // Create the embed with the question
-    const embed = new EmbedBuilder()
-      .setTitle("Trivia Question")
-      .setDescription(trivia.question)
-      .setColor(0x0099ff);
-
-    await interaction.reply({
-      embeds: [embed],
-      components: [row],
-    });
-
-    // Collector to handle button clicks
-    const filter = (i) => i.user.id === interaction.user.id;
-    const collector = interaction.channel.createMessageComponentCollector({
-      filter,
-      time: 60000, // 60 seconds
-    });
-
-    collector.on("collect", async (i) => {
-      const selectedIndex = parseInt(i.customId.split("_")[1]);
-
-      if (selectedIndex === trivia.correctIndex) {
-        await i.reply({
-          content: "✅ **Correct!**",
-          ephemeral: true,
-        });
-      } else {
-        await i.reply({
-          content: `❌ **Incorrect!** The correct answer was: **${trivia.options[trivia.correctIndex]}**`,
-          ephemeral: true,
-        });
-      }
-
-      collector.stop();
-    });
-
-    collector.on("end", (collected) => {
-      if (collected.size === 0) {
-        interaction.editReply({
-          components: [], // Remove buttons after timeout
-        });
-      }
-    });
   },
 };

@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { getAllergen } from "../helpers/allergen.js";
+import { getUserRecipe } from "../state.js";
 
 export default {
   data: new SlashCommandBuilder()

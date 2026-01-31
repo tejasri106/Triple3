@@ -1,6 +1,6 @@
 
 import { SlashCommandBuilder } from "discord.js";
-//no updates
+
 const recipes = [
   "Veggie & Egg Fried Rice",
   "One-Pan Quesadilla (or wrap melt)",

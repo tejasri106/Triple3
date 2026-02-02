@@ -1,6 +1,3 @@
-//import dotenv from "dotenv";
-//dotenv.config({ path: "../.env" });
-
 const { REST, Routes } = require("discord.js");
 const fs = require("fs");
 const path = require("path");

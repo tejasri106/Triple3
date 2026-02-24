@@ -7,20 +7,34 @@ export default {
     .setName("allergen")
     .setDescription("Get allergen alternative")
     .addStringOption(option =>
-    option.setName("name")
-      .setDescription("Allergen (egg, dairy, gluten, soy)")
-      .setRequired(true)
-  ),
+      option
+        .setName("name")
+        .setDescription("Allergen")
+        .setRequired(true)
+        .addChoices(
+          { name: "Egg", value: "egg" },
+          { name: "Dairy", value: "dairy" },
+          { name: "Gluten", value: "gluten" },
+          { name: "Soy", value: "soy" }
+        )
+    ),
 
-async execute(interaction) {
+  async execute(interaction) {
     const allergen = interaction.options.getString("name");
     const recipeNumber = getUserRecipe(interaction.user.id);
-    //const recipeNumber = 1; // Temporary fix until state management is implemented
+
+    if (!recipeNumber) {
+      return interaction.reply({
+        content: "❌ Please select a recipe first.",
+        ephemeral: true
+      });
+    }
 
     const response = await getAllergen(recipeNumber, allergen);
 
     await interaction.reply({
-      content: response ?? "Sorry — I don't have a substitution for that allergen yet!"
+      content:
+        response ?? "Sorry — I don't have a substitution for that allergen yet!"
     });
-},
+  },
 };

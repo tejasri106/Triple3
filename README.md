@@ -83,7 +83,7 @@ After selecting a cuisine, choose a recipe using:
 | `/nutrition:<recipe name>` | Shows nutritional information for the selected recipe |
 | `/rate` | Rate a recipe |
 | `/ratings` | View the average rating of a recipe |
-| `/timer` | Allows user to set a timer for a length of their choice |
+| `/voiceTimer:<minutes> <seconds>` | Allows user to set a timer for a length of their choice in minutes and seconds |
 
 ---
 
@@ -97,3 +97,4 @@ After selecting a cuisine, choose a recipe using:
 6. Set a timer: timer/2
 7. Rate the recipe: /rate
 8. View Ratings: /ratings
+

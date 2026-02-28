@@ -174,40 +174,7 @@ const nutrition = {
     fat: "20g"
   },
 
-  "spinach_cheese_toast": {
-    calories: 340,
-    protein: "14g",
-    carbs: "32g",
-    fat: "16g"
-  },
-
-  "yogurt_berry_bowl": {
-    calories: 260,
-    protein: "14g",
-    carbs: "32g",
-    fat: "6g"
-  },
-
-  "mediterranean_chickpea_salad": {
-    calories: 420,
-    protein: "18g",
-    carbs: "48g",
-    fat: "14g"
-  },
-
-  "egg_cheese_breakfast_sandwich": {
-    calories: 430,
-    protein: "22g",
-    carbs: "34g",
-    fat: "22g"
-  },
-
-  "rice_beans_comfort_bowl": {
-    calories: 480,
-    protein: "18g",
-    carbs: "72g",
-    fat: "8g"
-  }
+  
 };
 
 export default nutrition;

@@ -14,7 +14,7 @@ export default {
     .addIntegerOption(option =>
       option
         .setName("number")
-        .setDescription("The recipe number from 1–5")
+        .setDescription("The recipe number")
         .setRequired(true)
         .setMinValue(1)
         .setMaxValue(recipesArray.length - 1)

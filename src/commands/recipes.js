@@ -37,7 +37,7 @@ export default {
     .setDescription("Shows recipe options"),
 
   async execute(interaction) {
-    let message = "Here are 5 recipes you can choose from:\n\n";
+    let message = "Here are some recipes you can choose from:\n\n";
     recipes.forEach((r, i) => {
       message += `${i + 1}. ${r}\n`;
     });
